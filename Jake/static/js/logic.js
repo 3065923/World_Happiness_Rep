@@ -28,6 +28,7 @@ d3.json(geoData).then(function(data) {
 
     // Define what  property in the features to use
     valueProperty: "Ladder score",
+    // valueProperty: chosenYear,
 
     // Set color scale
     // scale: ["#BEFF33", "#B83B2A"],

@@ -19,7 +19,7 @@ h2 {
 
 /* CSS from the Leaflet-Choropleth documentation */
 .legend {
-  padding: 6px 8px;
+  padding: 6px 8px 40px;
   font: 12px Arial, Helvetica, sans-serif;
   font-weight: bold;
   color: #555;
@@ -27,6 +27,7 @@ h2 {
   background: rgba(255, 255, 255, 0.8);
   border-radius: 5px;
   box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+  /* margin-bottom: 100px; */
 }
 
 .legend ul {
@@ -53,4 +54,42 @@ h2 {
 
 h1 {
   text-align: center;
+}
+
+.dropdown {
+  z-index: 100;
+
+  /* margin-top: 75px; */
+}
+
+.centered {
+  position: absolute;
+  top: 20px;
+  left: 45%;
+  right: 50%;
+
+}
+
+
+#map {
+  z-index: 1;
+  position: relative;
+}
+
+.pulldown {
+  /* position: absolute; */
+  top: 20px;
+  left: 45%;
+  right: 50%;
+
+}
+
+h7 {
+  margin-left: 120px;
+  font-weight: lighter;
+  font-size: 10px;
+}
+
+h5 {
+  margin-left: 50%;
 }
