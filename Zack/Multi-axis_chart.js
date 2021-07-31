@@ -1,3 +1,4 @@
+// Build function to make chart responsive
 function makeResponsive() {
     // if the SVG area isn't empty when the browser loads,
     // remove it and replace it with a resized version of the chart
@@ -11,8 +12,7 @@ function makeResponsive() {
     var svgWidth = window.innerWidth * 0.8;
     var svgHeight = window.innerHeight * 0.8;
 
-
-
+    //Set Margins
     var margin = {
         top: 20,
         right: 40,
@@ -20,9 +20,11 @@ function makeResponsive() {
         left: 100
     };
 
+    // Set Width and Height variables
     var width = svgWidth - margin.left - margin.right;
     var height = svgHeight - margin.top - margin.bottom;
 
+    //Create an SVG wrapper, append an SVG to hold the chart, and shift it to the right spot
     var svg = d3
         .select(".chart")
         .append("svg")
@@ -35,23 +37,26 @@ function makeResponsive() {
         .attr("fill", "gray")
         .attr("opacity", "0.3");
 
-    var chartGroup = svg.append("text")
-        .attr("x", (width/2))
-        .attr("y", 0 - (margin.top/2))
-        .attr("text-anchor", "middle")
-        .attr("font-size", "16px")
-        .attr("text-decoration", "underline")
-        .text("Happiness Score vs. The Six Explanatory Factors");
+    // var chartGroup = svg.append("text")
+    //     .attr("x", (width/2))
+    //     .attr("y", 0 - (margin.top/2))
+    //     .attr("text-anchor", "middle")
+    //     .attr("font-size", "16px")
+    //     .attr("text-decoration", "underline")
+    //     .text("Happiness Score vs. The Six Explanatory Factors");
 
     var chartGroup = svg.append("g")
         .attr("transform", `translate(${margin.left}, ${margin.top})`);
 
 
+    // Set initital parameters
     var chosenXAxis = "Logged GDP per capita";
 
 
+    // Build function used for updating x-scale when axis label is selected
     function xScale(worldHappinessReport, chosenXAxis) {
 
+        // Create Scales
         var xLinearScale = d3.scaleLinear()
             .domain([d3.min(worldHappinessReport, d => d[chosenXAxis]) * 0.9,
                 d3.max(worldHappinessReport, d => d[chosenXAxis]) * 1.1
@@ -62,7 +67,7 @@ function makeResponsive() {
 
     }
 
-
+    // Function used for updating xAxis when axis label is selected
     function renderAxes(newXScale, xAxis) {
         var bottomAxis = d3.axisBottom(newXScale);
 
@@ -74,6 +79,7 @@ function makeResponsive() {
     }
 
 
+    // Build function for updating circles group with transition to new circles
     function renderCircles(circlesGroup, newXScale, chosenXAxis) {
 
         circlesGroup.transition()
@@ -83,7 +89,7 @@ function makeResponsive() {
         return circlesGroup;
     }
 
-
+    // Build function for updating circles group with new tooltip
     function updateToolTip(chosenXAxis, circlesGroup) {
 
         var label;
@@ -111,7 +117,7 @@ function makeResponsive() {
             .attr("class", "tooltip")
             .offset([80, -60])
             .html(function(d) {
-                return (`${d["Country name"]}<br>${label} ${d[chosenXAxis]}`);
+                return (`${d["Country name"]}<br>${"Happiness Score: "} ${d["Ladder score"]}<br>${label} ${d[chosenXAxis]}`);
             });
 
         circlesGroup.call(toolTip);
@@ -127,9 +133,11 @@ function makeResponsive() {
         return circlesGroup;
     }
 
+    // Retrieve data from the CSV file and execute everything below
     d3.csv("world-happiness-report-2021.csv").then(function(worldHappinessReport, err) {
         if (err) throw err;
 
+        // Parse Data
         worldHappinessReport.forEach(function(data) {
             data["Ladder score"] = +data["Ladder score"];
             data["Logged GDP per capita"] = +data["Logged GDP per capita"];
@@ -140,23 +148,29 @@ function makeResponsive() {
             data["Perceptions of corruption"] = +data["Perceptions of corruption"];
         });
 
+        // Sel xLinearScale based on CSV
         var xLinearScale = xScale(worldHappinessReport, chosenXAxis);
 
+        // Create y scale function
         var yLinearScale = d3.scaleLinear()
             .domain([2,d3.max(worldHappinessReport, d => d["Ladder score"])])
             .range([height,0]);
 
+        // Create initial axis functions
         var bottomAxis = d3.axisBottom(xLinearScale);
         var leftAxis = d3.axisLeft(yLinearScale);
 
+        // Append X Axis
         var xAxis = chartGroup.append("g")
             .classed("x-axis", true)
             .attr("transform", `translate(0, ${height})`)
             .call(bottomAxis);
 
+        // Append Y Axis
         chartGroup.append("g")
             .call(leftAxis);
 
+        // Append initial circles
         var circlesGroup = chartGroup.selectAll("circle")
             .data(worldHappinessReport)
             .enter()
@@ -169,6 +183,7 @@ function makeResponsive() {
             .attr("stroke","black")
             .attr("stroke-width","2px");
 
+        // Create group for multi-axis labels
         var labelsGroup = chartGroup.append("g")
             .attr("transform", `translate(${width / 2}, ${height + 20})`);
 
@@ -214,7 +229,7 @@ function makeResponsive() {
             .classed("active", true)
             .text("Perceptions of Corruption");
 
-
+        // Append Y Axis
         chartGroup.append("text")
             .attr("transform", "rotate(-90)")
             .attr("y", 0 - margin.left)
@@ -223,25 +238,34 @@ function makeResponsive() {
             .classed("axis-text", true)
             .text("Happiness Score");
 
+        // UpdateToolTip function above csv import
         var circlesGroup = updateToolTip(chosenXAxis, circlesGroup);
 
+        // X Axis labels event listener
         labelsGroup.selectAll("text")
             .on("click", function() {
 
+                // Get Value of Selection
                 var value = d3.select(this).attr("value");
                 if (value !== chosenXAxis) {
 
+                    // Replaces chosenXAxis with value
                     chosenXAxis = value;
 
-
+                // Functions called here built before CSV import
+                // Updates x scale for new data
                 xLinearScale = xScale(worldHappinessReport, chosenXAxis);
 
+                // Updates x axis with transition
                 xAxis = renderAxes(xLinearScale, xAxis);
 
+                // Updates circles with new x values
                 circlesGroup = renderCircles(circlesGroup, xLinearScale, chosenXAxis);
 
+                // Updates tooltips with new info
                 circlesGroup = updateToolTip(chosenXAxis, circlesGroup);
 
+                // Changes classes to change bold text
                 if (chosenXAxis === "Logged GDP per capita") {
                     GDPLabel
                         .classed("active", true)
