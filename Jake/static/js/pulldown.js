@@ -29,7 +29,6 @@ function buildMap(sample) {
     var path= d3.select("g");
     path.html("");
 
-
   // Grab data with d3
   d3.json(geoData).then((data) => {
     console.log(data);
@@ -322,6 +321,7 @@ function init() {
 
     buildMap(2021)
 };
-  
+
+
 
 init();
