@@ -45,7 +45,7 @@ function makeResponsive(sample) {
     .attr("transform", `translate(${margin.left}, ${margin.top})`);
 
   // Read CSV
-  d3.csv("CSV_files/Explained_Percents.csv").then((joyData) => {
+  d3.csv("Explained_Percents.csv").then((joyData) => {
 //     var regionSelect = joyData.filter(sampleObject => sampleObject["Regional indicator"] == sample)
 
  
@@ -209,7 +209,7 @@ function optionChanged (nextSample) {
 region_list= ['All Countries','Western Europe', 'North America and ANZ', 'Middle East and North Africa', 
 'Latin America and Caribbean', 'Central and Eastern Europe', 'East Asia', 'Southeast Asia', 
 'Commonwealth of Independent States', 'Sub-Saharan Africa', 'South Asia']
-testdata= 'CSV_Files/Explained_Percents.csv'
+testdata= 'Explained_Percents.csv'
 function init() {
   var pullDownMenu = d3.select("#selDataset");
   d3.csv(testdata).then((data) => {
