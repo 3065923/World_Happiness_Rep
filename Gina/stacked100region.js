@@ -232,8 +232,3 @@ init();
 
 // When the browser window is resized, makeResponsive() is called.
 d3.select(window).on("resize", makeResponsive);
-
-
-// // to do:  y
-// //        add region filter
-// //        add tooltips
