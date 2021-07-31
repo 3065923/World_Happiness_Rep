@@ -249,7 +249,7 @@ function buildMap(sample) {
     // Set up the legend
     var legendSelect= d3.select('.legend');
 
-    var legend = L.control({ position: "bottomright" });
+    var legend = L.control({ position: "topright" });
     legend.onAdd = function() {
       var div = L.DomUtil.create("div", "info legend");
       var limits = geojson.options.limits;
