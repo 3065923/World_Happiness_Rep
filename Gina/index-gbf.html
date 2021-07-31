@@ -8,10 +8,30 @@
   </head>
 
   <body>
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12 jumbotron text-center">
+          <h1>Building the Score: Relative Contribution of Factors</h1>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-6">
+          <div class = "well">
+            <h2>Region:</h2>
+          </div>
+        </div>  
+        <div class="col-md-6">
+          <div class="well">
+             <select id="selDataset" onchange="optionChanged(this.value)"></select>
+          </div> 
+        </div> 
+      </div> 
+    </div>
+         
     <div class="stackedBar"></div>
     <script src="https://d3js.org/d3.v5.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/d3-tip/0.7.1/d3-tip.min.js"></script>
-    <script type="text/javascript" src="tryagain.js"></script>
+    <script type="text/javascript" src="stacked100region.js"></script>
   </body>
 
 </html>
