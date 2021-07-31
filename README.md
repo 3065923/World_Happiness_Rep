@@ -6,7 +6,7 @@
 
 ## Purpose
 
-#### While the data contained within the World Happiness Report covers a wide variety of valuable topics, the data is difficult to absorb without proper visualization. In order to better understand the data, there are a variety of key factors that one should attempt to visualize. One of these key visualizations is a geographic representation of the overallall happiness score allowing the ability to see if happiness is concentrated in certain geographic regions. The visualizations should also break the data down into its component pieces and allow one to compare the different countries included. Finally, the visualizations should allow the user to see how these factors join together to create each countries happiness score, helping to identify which factors are the true primary drivers and which have little overall impact.
+#### While the data contained within the World Happiness Report covers a wide variety of valuable topics, the data is difficult to absorb without proper visualization. In order to better understand the data, there are a variety of key factors that one should attempt to visualize. One of these key visualizations is a geographic representation of the overall happiness score allowing the ability to see if happiness is concentrated in certain geographic regions. The visualizations should also break the data down into its component pieces and allow one to compare the different countries included. Finally, the visualizations should allow the user to see how these factors join together to create each countries happiness score, helping to identify which factors are the true primary drivers and which have little overall impact.
 
 ## Goals 
 
