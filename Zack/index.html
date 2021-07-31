@@ -3,14 +3,66 @@
 	<head>
 		<meta charset="utf-8">
 		<title>World Happiness Report</title>
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 		<link rel="stylesheet" type="text/css" href="style.css">
+		<nav class="navbar navbar-expand-lg navbar-light bg-light">
+			<a class="navbar-brand" href="#">Home</a>
+			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+			  <span class="navbar-toggler-icon"></span>
+			</button>
+			<div class="collapse navbar-collapse" id="navbarNav">
+			  <ul class="navbar-nav">
+				<li class="nav-item active">
+				  <a class="nav-link" href="The_Six_Factors.html">The Six Factors</a>
+				</li>
+				<li class="nav-item">
+				  <a class="nav-link" href="#">Building The Score</a>
+				</li>
+				<li class="nav-item">
+				  <a class="nav-link" href="#">World Map</a>
+				</li>
+			  </ul>
+			</div>
+		  </nav>
 	</head>
 	<body>
-		<h1 style="text-decoration: underline; padding-left: 280px;">Happiness Score vs. The Six Explanatary Factors for 2021</h1>
-		<div id="container" class="chart">
+        <div class="container">
+            <section class="row">
+                <div class="col-md-8">
+                    <article class="summary-content">
+                        <h1 class="summary-header"> The World Happiness Report</h1>
+                        <hr class="summary-hr"/>
+                        <img src="Assets/images/Fig1.png" alt= "" id= "summary-image"/>
+                        <h2>Background</h2>
+                        <p>The World Happiness Report attempts to find a standardized measure of Happiness in different countries around the globe. Published by the United Nations Sustainable Development Solutions Network, the report looks at a variety of explanatory factors, to create an individual score for each country. The report is created every year by a group of independent experts.</p>
+                        <h2>Purpose</h2>
+                        <p>While the data contained within the World Happiness Report covers a wide variety of valuable topics, without proper visualization the data is difficult to parse. In order to understand the data, there are a couple of key factors that one should attempt to visualize. One of the key visualizations should represent the data geographically. The visualizations should also break the data down into its component pieces and allow one to compare the different countries included. Finally, the visualizations should allow the user to see how these factors join together to create each countries happiness score.</p>
+                        <h2>Goals</h2>
+                        <p>With this in mind, this project aims to create three specific visualizations for this data. First, a multi-axis scatterplot will be developed with the y-axis being the Happiness Score, and the x-axis changing based on the selection of each of the six explanatory factors. Each circle on the chart will represent a country, and tooltips will be included to specify the x & y values for each data point. In addition to this chart, a stacked bar graph will also be created. Each country will have its own bar, and that bar will be divided based on how much of an impact each explanatory factor has on the final score. These values add up to the Happiness Score for each country. Tooltips will be used to help see each portion of the data clearly, and if time allows, the chart will have filters so one can look at smaller subsets of the data. Finally, a choropleth will be created to allow visualization across the world map. Each country that is included in the report will be filled with a scaling color based on the country’s Happiness Score. While the first two charts, only look at data from 2021, the choropleth will have a dropdown that allows for viewing the map of each report, from 2005 to the present. With these three visualizations the user will be able to gain a greater understanding of the data and be able to more readily draw conclusions about it.</p>
+                    </article>
+                </div>
+                <div class="col-md-4">
+                    <section id="image-area">
+                        <div class="image-content">
+                            <h2 class="image-header">Charts</h2>
+                            <hr />
+                            <div id="images">
+                                <a href="The_Six_Factors.html"><img src="Multi-Axis Chart.PNG" alt="The Six Factors" class="image-photo"></a></br>
+                                </br>
+                                <a href="#"><img src="Stacked Bar.PNG" alt="Building The Score" class="image-photo"></a></br>
+                                </br>
+                                <a href="#"><img src="World Map.PNG" alt="World Map" class="image-photo"></a></br>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+            </section>
+        </div>
 		</div>
 		<script src="https://d3js.org/d3.v5.min.js"></script>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/d3-tip/0.7.1/d3-tip.min.js"></script>
-		<script type="text/javascript" src="Multi-axis_chart.js"></script>
+		<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
   </body>
 </html>
