@@ -1,21 +1,15 @@
-// The code for the chart is wrapped inside a function that
-// automatically resizes the chart
+
 function makeResponsive(sample) {
-  // if the SVG area isn't empty when the browser loads,
-  // remove it and replace it with a resized version of the chart
-  //clears fill  from previous map
+
   var path= d3.select("g");
   path.html("");
 
   var svgArea = d3.select("body").select("svg");
 
-  // clear svg is not empty
   if (!svgArea.empty()) {
     svgArea.remove();
   }
 
-  // SVG wrapper dimensions are determined by the current width and
-  // height of the browser window.
   var svgWidth = window.innerWidth;
   var svgHeight = window.innerHeight * .7;
 
@@ -29,7 +23,6 @@ function makeResponsive(sample) {
   var height = svgHeight - margin.top - margin.bottom;
   var width = svgWidth - margin.left - margin.right;
 
-  // Append SVG element
   var svg = d3
     .select(".stackedBar")
     .append("svg")
@@ -38,38 +31,28 @@ function makeResponsive(sample) {
     .attr("class", "boxybox")
     .style("background-color", 'black');
 
-  // Append group element
   var chartGroup = svg
     .append("g")
     .attr("class", "chartGroup")
     .attr("transform", `translate(${margin.left}, ${margin.top})`);
 
-  // Read CSV
   d3.csv("Explained_Percents.csv").then((joyData) => {
-//     var regionSelect = joyData.filter(sampleObject => sampleObject["Regional indicator"] == sample)
 
- 
 	if (sample == "All Countries") {
 	var regionSelect =  joyData}
 	else {
 	var regionSelect = joyData.filter(sampleObject => sampleObject["Regional indicator"] == sample)}
-
-
 	
     var subgroups = joyData.columns.slice(1, 8);
-
-//     console.log(regionSelect)
 
     height2 = height + margin.top;
 
     var groups = d3
       .map(regionSelect, function (d) {
-        return d["Country name"];
+        return d.xText;
       })
       .keys();
 
-//       console.log(groups)
-    // Add X axis
     var x = d3
       .scaleBand()
       .domain(groups)
@@ -87,12 +70,9 @@ function makeResponsive(sample) {
       .attr("transform", "rotate(-90)")
       .style("color", "white");
 
-    // Add Y axis
     var y = d3.scaleLinear().domain([0, 1]).range([height, 0]);
     svg.append("g")
     .attr("class", "y-axis")
-    
-
 
     var yAxis = d3.axisLeft(y);
 
@@ -109,9 +89,7 @@ function makeResponsive(sample) {
         "#FF0000",
       ]);
 
-    //stack the data? --> stack per subgroup
     var stackedData = d3.stack().keys(subgroups)(regionSelect);
-
 
     svg
       .append("g")
@@ -124,7 +102,7 @@ function makeResponsive(sample) {
       .selectAll("rect")
       .data((d) => d)
       .join("rect")
-      .attr("x", (d, i) => x(d.data["Country name"]))
+      .attr("x", (d, i)=> x(d.data.xText))
       .attr("y", (d) => y(d[1]))
       .attr("height", (d) => y(d[0]) - y(d[1]))
       .attr("width", x.bandwidth());
@@ -143,7 +121,6 @@ function makeResponsive(sample) {
       .style("fill", "white")
       .text("Country");
 
-    // text label for the y axis
     svg
       .append("text")
       .attr("transform", "rotate(-90)")
@@ -179,7 +156,6 @@ function makeResponsive(sample) {
         return color(d);
       });
 
-    // Add one dot in the legend for each name.
     svg
       .selectAll("mylabels")
       .data(keys)
@@ -196,26 +172,29 @@ function makeResponsive(sample) {
         return d;
       })
       .attr("text-anchor", "left")
-      .style("alignment-baseline", "middle");
+      .style("alignment-baseline", "middle");   
 
-      
 });
 }
 
 function optionChanged (nextSample) {
 	makeResponsive(nextSample);
-};
+	};
+	
+d3.select(window).on("resize", makeResponsive);
 
 region_list= ['All Countries','Western Europe', 'North America and ANZ', 'Middle East and North Africa', 
 'Latin America and Caribbean', 'Central and Eastern Europe', 'East Asia', 'Southeast Asia', 
 'Commonwealth of Independent States', 'Sub-Saharan Africa', 'South Asia']
+
 testdata= 'Explained_Percents.csv'
+
 function init() {
   var pullDownMenu = d3.select("#selDataset");
   d3.csv(testdata).then((data) => {
-    // console.log(data)
+
       var regionNames = region_list;
-//       console.log(regionNames);
+
       regionNames.forEach((sample) => {
           pullDownMenu
               .append("option")
@@ -226,9 +205,3 @@ function init() {
   makeResponsive("All Countries")
 };
 init();
-
-// // When the browser loads, makeResponsive() is called.
-// makeResponsive("All Countries");
-
-// When the browser window is resized, makeResponsive() is called.
-d3.select(window).on("resize", makeResponsive);
