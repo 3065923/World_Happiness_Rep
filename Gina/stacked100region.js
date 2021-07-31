@@ -17,7 +17,7 @@ function makeResponsive(sample) {
   // SVG wrapper dimensions are determined by the current width and
   // height of the browser window.
   var svgWidth = window.innerWidth;
-  var svgHeight = window.innerHeight;
+  var svgHeight = window.innerHeight * .8;
 
   var margin = {
     top: 50,
@@ -46,21 +46,15 @@ function makeResponsive(sample) {
 
   // Read CSV
   d3.csv("../CSV_files/Explained_Percents.csv").then((joyData) => {
-    var regionSelect = joyData.filter(sampleObject => sampleObject["Regional indicator"] == sample)
+//     var regionSelect = joyData.filter(sampleObject => sampleObject["Regional indicator"] == sample)
 
-//    var regionSelect = function(d) {
-// 	if (sample == "All Countries") {
-// 	return joyData}
-// 	else {
-// 	return joyData.filter(sampleObject => sampleObject["Regional indicator"] == sample)}};
+ 
+	if (sample == "All Countries") {
+	var regionSelect =  joyData}
+	else {
+	var regionSelect = joyData.filter(sampleObject => sampleObject["Regional indicator"] == sample)}
 
-// var regionSelect = 
-// 		if (sample = value) {
-// 		 return joyData.filter(sampleObject => sampleObject["Regional indicator"] == sample)}
-// 		else {
-// 		return joyData};
 
-		// console.log(regionSelect)
 	
     var subgroups = joyData.columns.slice(1, 8);
 
@@ -212,7 +206,7 @@ function optionChanged (nextSample) {
 	makeResponsive(nextSample);
 };
 
-region_list= ['Western Europe', 'North America and ANZ', 'Middle East and North Africa', 
+region_list= ['All Countries','Western Europe', 'North America and ANZ', 'Middle East and North Africa', 
 'Latin America and Caribbean', 'Central and Eastern Europe', 'East Asia', 'Southeast Asia', 
 'Commonwealth of Independent States', 'Sub-Saharan Africa', 'South Asia']
 testdata= '../CSV_Files/Explained_Percents.csv'
@@ -229,7 +223,7 @@ function init() {
               .text(sample);
       });
   });
-  makeResponsive("Western Europe")
+  makeResponsive("All Countries")
 };
 init();
 
