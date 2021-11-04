@@ -1,4 +1,4 @@
-# Project_2
+# World Happiness Report
 
 ## Background
 
@@ -13,4 +13,3 @@
 #### With this in mind, this project aims to create three specific visualizations for this data. First, a multi-axis scatterplot will be developed with the y-axis being the Happiness Score, and the x-axis changing based on the selection of each of the six explanatory factors. Each circle on the chart will represent a country, and tooltips will be included to specify the x & y values for each data point. In addition to this chart, a stacked bar graph will also be created. Each country will have its own bar, and that bar will be divided based on how much of an impact each explanatory factor has on the final score. These values add up to the Happiness Score for each country. The chart is able to be filtered by geographic region to compare smaller subsets of the data. Finally, a choropleth will be created to allow visualization across the world map. Each country that is included in the report will be filled with a scaling color based on the country’s Happiness Score. While the first two charts, only look at data from 2021, the choropleth will have a dropdown that allows for viewing the map of each report, from 2005 to the present. With these three visualizations the user will be able to gain a greater understanding of the data and be able to more readily draw conclusions about it.
 
 
-### https://dataninjaprincess.github.io/Project_2/
